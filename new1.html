@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secret Code Submission</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #b0e0e6; /* Light blue background color */
+            background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 100%), linear-gradient(45deg, #e0ffff 25%, transparent 25%, transparent 75%, #e0ffff 75%, #e0ffff), linear-gradient(45deg, #e0ffff 25%, transparent 25%, transparent 75%, #e0ffff 75%, #e0ffff); /* Ice effect */
+        }
+        .card {
+            width: 300px;
+            padding: 20px;
+            margin: 20px; /* Add margin for spacing */
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.9); /* Card background color with opacity */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow effect */
+            transition: background-color 0.5s; /* Smooth transition for background color */
+            position: relative; /* Relative positioning for containing absolute positioned elements */
+            z-index: 1; /* Ensure card is above bubbles */
+        }
+        .content {
+            text-align: center;
+            color: #333; /* Text color */
+        }
+        .secret-form {
+            padding: 20px 0;
+        }
+        .secret-form input[type="text"] {
+            padding: 12px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 30px; /* Rounded corners */
+            background: linear-gradient(145deg, #ffffff, #e0e0e0); /* Gradient background */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow effect */
+            margin-bottom: 20px;
+            width: calc(100% - 40px);
+            box-sizing: border-box;
+            color: #555; /* Text color for input field */
+            transition: box-shadow 0.3s, transform 0.3s; /* Smooth transitions */
+            outline: none; /* Remove default outline */
+        }
+        .secret-form input[type="text"]:focus {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Highlight shadow on focus */
+            transform: translateY(-2px); /* Move input up slightly on focus */
+        }
+        .secret-form input[type="submit"] {
+            padding: 12px 0;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 30px; /* Rounded corners */
+            width: calc(100% - 40px);
+            transition: background-color 0.3s; /* Smooth transition */
+        }
+        .secret-form input[type="submit"]:hover {
+            background-color: #45a049; /* Darker background color on hover */
+        }
+        .ice-piece {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: white; /* Ice color */
+            border-radius: 50%;
+            animation: fall 10s linear infinite; /* Falling animation */
+        }
+        @keyframes fall {
+            0% {
+                transform: translateY(-100vh); /* Start position above the viewport */
+                opacity: 0; /* Initial opacity */
+            }
+            100% {
+                transform: translateY(100vh); /* End position below the viewport */
+                opacity: 1; /* Fully visible */
+            }
+        }
+        .marriage-text h3, .joke-text h3, .love-text h3 {
+            text-transform: uppercase; /* Transform text to uppercase */
+            overflow: hidden; /* Hide overflow */
+            white-space: nowrap; /* Prevent line breaks */
+            width: 0; /* Initially hide the text */
+        }
+        @keyframes typing {
+            from {
+                width: 0; /* Initially hide the text */
+            }
+            to {
+                width: 100%; /* Fully reveal the text */
+            }
+        }
+        @keyframes fadeOut {
+            from {
+                opacity: 1; /* Fully visible */
+            }
+            to {
+                opacity: 0; /* Fully transparent */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Card with content -->
+    <div class="card" id="card">
+        <div class="content">
+            <h1 id="welcomeText">Welcome!</h1>
+            <p id="instructionText">Please submit 4 digit secret code below:</p>
+            <form class="secret-form" action="#" method="POST" onsubmit="return handleSubmit()">
+                <input type="text" id="secret_code" name="secret_code" placeholder="Enter the secret code ">
+                <input type="submit" value="Submit">
+            </form>
+            <div class="marriage-text" style="display: none;">
+                <h3>Will you marry me?</h3>
+            </div>
+            <div class="joke-text" style="display: none;">
+                <h3>Just kidding</h3>
+            </div>
+            <div class="love-text" style="display: none;">
+                <h3>But I Love Your Sister</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Falling ice pieces -->
+    <div class="ice-piece" style="left: 20%; animation-duration: 8s;"></div>
+    <div class="ice-piece" style="left: 50%; animation-duration: 12s;"></div>
+    <div class="ice-piece" style="left: 80%; animation-duration: 10s;"></div>
+
+    <script>
+        // Function to handle form submission
+        function handleSubmit() {
+            var secretCode = document.getElementById('secret_code').value.trim().toLowerCase();
+    
+            // Check if the secret code is correct
+            if (secretCode === "meaw meaw meaw meaw") {
+                // Hide the welcome and instruction text
+                document.getElementById('welcomeText').style.display = 'none';
+                document.getElementById('instructionText').style.display = 'none';
+                // Hide the form
+                document.querySelector('.secret-form').style.display = 'none';
+                // Show the marriage text
+                var marriageText = document.querySelector('.marriage-text');
+                marriageText.style.display = 'block';
+                marriageText.querySelector('h3').style.animation = 'typing 5s forwards, fadeOut 5s 6s forwards';
+                // Show the joke text after a delay
+                setTimeout(function() {
+                    var jokeText = document.querySelector('.joke-text');
+                    jokeText.style.display = 'block';
+                    jokeText.querySelector('h3').style.animation = 'typing 5s forwards, fadeOut 5s 6s forwards';
+                }, 6000); // Delay in milliseconds
+                // Show the love text after another delay
+                setTimeout(function() {
+                    var loveText = document.querySelector('.love-text');
+                    loveText.style.display = 'block';
+                    loveText.querySelector('h3').style.animation = 'typing 5s forwards, fadeOut 5s 6s forwards';
+                    // Redirect to new.html after the last text disappears
+                    setTimeout(function() {
+                        window.location.href = 'new.html'; // Replace 'new.html' with your desired URL
+                    }, 12000); // Delay in milliseconds
+                }, 12000); // Delay in milliseconds
+                return false; // Prevent form submission
+            } else {
+                alert('Incorrect secret code. Please try again.');
+                return false; // Prevent form submission
+            }
+        }
+    </script>
+    
+</body>
+</html>

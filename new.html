@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secret Code Submission</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #b0e0e6; /* Light blue background color */
+            background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 100%), linear-gradient(45deg, #e0ffff 25%, transparent 25%, transparent 75%, #e0ffff 75%, #e0ffff), linear-gradient(45deg, #e0ffff 25%, transparent 25%, transparent 75%, #e0ffff 75%, #e0ffff); /* Ice effect */
+        }
+        .congrats-card {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            border: 2px solid #000; /* Border */
+            background-color: #fff; /* White background */
+            text-align: center;
+        }
+        .heart-emoji {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: heart-fall 5s linear infinite; /* Falling animation */
+        }
+        @keyframes heart-fall {
+            0% {
+                top: -20px; /* Start position above the viewport */
+            }
+            100% {
+                top: 100vh; /* End position below the viewport */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="congrats-card">
+        <h1>Congratulations!</h1>
+        <p>You're Officially My Girlfriend Now</p>
+    </div>
+
+    <!-- Unlimited heart emojis -->
+    <div class="heart-emoji">❤️</div>
+    <div class="heart-emoji">❤️</div>
+    <div class="heart-emoji">❤️</div>
+    <!-- Add more heart emojis as needed -->
+
+    <!-- JavaScript code to create more heart emojis -->
+    <script>
+        // Function to create heart emojis
+        function createHeartEmoji() {
+            const heartEmoji = document.createElement('div');
+            heartEmoji.classList.add('heart-emoji');
+            heartEmoji.innerHTML = '❤️';
+            heartEmoji.style.left = Math.random() * window.innerWidth + 'px'; // Random horizontal position
+            document.body.appendChild(heartEmoji);
+
+            // Remove heart emoji element after animation completes
+            heartEmoji.addEventListener('animationend', () => {
+                heartEmoji.remove();
+            });
+        }
+
+        // Create heart emojis continuously
+        setInterval(createHeartEmoji, 500); // Create a heart emoji every 0.5 second
+    </script>
+</body>
+</html>
